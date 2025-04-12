@@ -8,7 +8,7 @@ import { GiPowerLightning } from "react-icons/gi";
 const Favourites = () => {
     const items = [
         {
-            img: "/product-3.jpg",
+            img: "/Product-3.jpg",
             name: "Electric Scooter",
             subName: "Folding E-Scooter",
             batery: "57KWH",
@@ -16,7 +16,7 @@ const Favourites = () => {
             Emission: "0.72g/km"
         },
         {
-            img: "/product-1.jpg",
+            img: "/Product-1.jpg",
             name: "VeloWave M5",
             subName: "Portable E-Scooter",
             batery: "98KWH",
@@ -24,7 +24,7 @@ const Favourites = () => {
             Emission: "0.17g/km"
         },
         {
-            img: "/product-2.jpg",
+            img: "/Product-2.jpg",
             name: "Segway-Ninebot",
             subName: "Electric Kick Scooters",
             batery: "54KWH",

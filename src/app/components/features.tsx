@@ -31,7 +31,7 @@ const Features = () => {
             desc2: "tyres are filled with puncture resistance materials"
         },
         {
-            img: "/home-4.jpg",
+            img: "/Home-4.jpg",
             title: "0-65 Kmph",
             subtitle: "Lightweight & Foldable",
             desc1: "in 4.6 Secs",
