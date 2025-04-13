@@ -54,7 +54,6 @@ const Features = () => {
 
   return (
     <div className='w-full bg-[#1b1b1b] lg:pb-20 pb-10'>
-        {/* <div className='w-[95%]'></div> */}
         <Slider {...carouselSettings}>
             {
                 carouselItems.map((e,i)=>(
