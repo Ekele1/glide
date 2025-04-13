@@ -5,6 +5,7 @@ import Features from "./components/features";
 import HeroPage from "./components/heroPage";
 import LimitedOffer from "./components/limitedOffer";
 import Quantum from "./components/quantum";
+import Services from "./components/service";
 import TwoPic from "./components/twopic";
 import Upgrade from "./components/upgrade";
 import ZoomInto from "./components/zoom";
@@ -22,6 +23,7 @@ export default function Home() {
       <Quantum />
       <Blog />
       <ZoomInto />
+      <Services />
     </div>
   );
 }
