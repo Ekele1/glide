@@ -3,7 +3,7 @@ import React from 'react'
 
 const HeroPage = () => {
   return (
-    <div className='w-full lg:h-screen h-[550px] relative'>
+    <div className='w-full lg:h-screen h-[550px] bg-[#1b1b1b] relative'>
         <Image className='w-full h-full' src="/glidex-home-1.jpg" priority fill sizes='fill' alt='image'/>
         <div className='w-full h-full absolute flex items-center justify-center'>
             <div className='w-[95%] flex flex-col items-center lg:items-start justify-center text-white'>

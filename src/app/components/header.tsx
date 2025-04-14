@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaInstagram } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
@@ -31,17 +31,18 @@ const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
   const router = useRouter();
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const navItems: NavItem[] = [
     { label: "Home", href: "/" },
     {
       label: "Pages",
-      href: "/pages",
+      href: "#",
       subItems: [
         { label: "About Us", href: "/about" },
+        { label: "Frequent QA's", href: "/frequent" },
         { label: "Login", href: "/login" },
         { label: "Store", href: "/store" },
-        { label: "FAQ", href: "/faq" },
       ],
     },
     { label: "Shop", href: "/shop" },
@@ -68,8 +69,17 @@ const Header = () => {
     adaptiveHeight: true,
   };
 
-  const toggleDropdown = (itemLabel: string) => {
-    setActiveDropdown(activeDropdown === itemLabel ? null : itemLabel);
+  const handleMouseEnter = (itemLabel: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setActiveDropdown(itemLabel);
+  };
+
+  const handleMouseLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 300); // 300ms delay before closing
   };
 
   const toggleMobileItem = (itemLabel: string) => {
@@ -79,6 +89,15 @@ const Header = () => {
   const toggleMobileMenu = () => {
     setShowMobileMenu((prev) => !prev);
   };
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -128,23 +147,36 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex gap-8 font-medium">
           {navItems.map((item) => (
-            <div key={item.label} className="relative group">
-              <div
-                className="flex items-center gap-1 cursor-pointer hover:text-green-300 transition-colors"
-                onClick={() => toggleDropdown(item.label)}
-              >
-                <Link href={item.href}>{item.label}</Link>
+            <div 
+              key={item.label} 
+              className="relative group"
+              onMouseEnter={() => item.subItems && handleMouseEnter(item.label)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className="flex items-center gap-1 cursor-pointer hover:text-green-300 transition-colors">
+                {item.subItems ? (
+                  <span className="py-2">{item.label}</span>
+                ) : (
+                  <Link href={item.href} className="py-2 block">
+                    {item.label}
+                  </Link>
+                )}
                 {item.subItems && (
                   activeDropdown === item.label ? <IoIosArrowUp /> : <IoIosArrowDown />
                 )}
               </div>
               {item.subItems && activeDropdown === item.label && (
-                <div className="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg py-1 z-50">
+                <div 
+                  className="absolute left-0 mt-0 w-48 bg-white text-gray-800 rounded-md shadow-lg py-1 z-50"
+                  onMouseEnter={() => handleMouseEnter(item.label)}
+                  onMouseLeave={handleMouseLeave}
+                >
                   {item.subItems.map((subItem) => (
                     <Link
                       key={subItem.label}
                       href={subItem.href}
                       className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setActiveDropdown(null)}
                     >
                       {subItem.label}
                     </Link>
@@ -197,7 +229,13 @@ const Header = () => {
                   }
                 }}
               >
-                <span className="font-medium">{item.label}</span>
+                {item.subItems ? (
+                  <span className="font-medium">{item.label}</span>
+                ) : (
+                  <Link href={item.href} className="font-medium" onClick={() => setShowMobileMenu(false)}>
+                    {item.label}
+                  </Link>
+                )}
                 {item.subItems && (
                   expandedMobileItem === item.label ? <IoIosArrowUp /> : <IoIosArrowDown />
                 )}
@@ -206,16 +244,17 @@ const Header = () => {
               {item.subItems && expandedMobileItem === item.label && (
                 <div className="ml-4 mt-2 space-y-2">
                   {item.subItems.map((subItem) => (
-                    <div
+                    <Link
                       key={subItem.label}
+                      href={subItem.href}
                       onClick={() => {
-                        router.push(subItem.href);
                         setShowMobileMenu(false);
+                        setExpandedMobileItem(null);
                       }}
-                      className="block py-1 text-gray-300 hover:text-white cursor-pointer"
+                      className="block py-1 text-gray-300 hover:text-white"
                     >
                       {subItem.label}
-                    </div>
+                    </Link>
                   ))}
                 </div>
               )}

@@ -11,7 +11,7 @@ const Footer = () => {
         <div className='w-[90%] max-w-[1200px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-white pt-10 pb-10 text-white'>
             {/* Company Info */}
             <div className='flex flex-col gap-3'>
-                <p className='font-bold text-3xl lg:text-[40px]'>GLIDE</p>
+                <p className='font-bold text-3xl lg:text-[40px] text-green-700'>GLIDE</p>
                 <p className='text-sm lg:text-base'>Glidex Motocorp Limited, The Grand Plaza Plat, No: 58 A, East Madison Street, Baltimore, USA 4508</p>
                 <p className='cursor-pointer hover:text-green-600 text-sm lg:text-base'>+(000) 1234 - 56789</p>
                 <p className='cursor-pointer hover:text-green-600 text-sm lg:text-base'>support@example.com</p>
