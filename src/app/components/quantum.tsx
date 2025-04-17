@@ -18,19 +18,21 @@ const Quantum = () => {
                 <p className='lg:text-[40px] text-[25px] font-bold'>QuantumGlide Z3</p>
                 <p>Folding E-Scooters</p>
                 <p className='text-[20px] font-bold mt-3'>$240.00-$380.00</p>
-                <div className='w-full flex items-center gap-7 pt-7 pb-7 border-b-[1px] border-white'>
-                    <div className='flex items-center gap-3'>
-                        <FiBatteryCharging size={40} color='green'/>
-                        <div>
-                            <p>Battery</p>
-                            <p className='font-bold '>90KWH</p>
+                <div className='w-full flex flex-col lg:flex-row gap-7 pt-7 pb-7 border-b-[1px] border-white'>
+                    <div className='w-full flex items-center gap-7'>
+                        <div className='flex items-center gap-3'>
+                            <FiBatteryCharging size={40} color='green'/>
+                            <div>
+                                <p>Battery</p>
+                                <p className='font-bold '>90KWH</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className='flex items-center gap-3'>
-                        <RiLightbulbFlashLine size={40} color='green'/>
-                        <div>
-                            <p>Range</p>
-                            <p className='font-bold '>176KM</p>
+                        <div className='flex items-center gap-3'>
+                            <RiLightbulbFlashLine size={40} color='green'/>
+                            <div>
+                                <p>Range</p>
+                                <p className='font-bold '>176KM</p>
+                            </div>
                         </div>
                     </div>
                     <div className='flex items-center gap-3'>
@@ -142,6 +144,7 @@ const Quantum = () => {
                     '>Buy Now</button>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
